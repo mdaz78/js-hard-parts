@@ -1,6 +1,8 @@
 // Challenge 1
 
-function sayHello() {}
+function sayHello() {
+  setTimeout(() => console.log('Hello'), 1000);
+}
 
 // Uncomment the line below when ready
 // sayHello(); // should log "Hello" after 1000ms
@@ -8,32 +10,39 @@ function sayHello() {}
 // Challenge 2
 var promise = new Promise(function(resolve, reject) {
   // ADD CODE HERE
+  return resolve();
 });
 
 // Should print out "Resolved!"
 // ADD CODE HERE
+// promise.then(sayHello);
 
 // Challenge 3
 
-promise = new Promise(function(resolve, reject) {
-  // ADD CODE HERE
-});
+// promise = new Promise(function(resolve, reject) {
+//   return reject();
+// });
 
 // Should print out "Reject!"
 // ADD CODE HERE
+// promise.catch((e) => console.log('Reject!'));
 
 // Challenge 4
 
 promise = new Promise(function(resolve, reject) {
-  // ADD CODE HERE
+  return resolve();
 });
 
 // Uncomment the lines below when ready
-// promise.then(() => console.log('Promise has been resolved!));
+// promise.then(() => console.log('Promise has been resolved!'));
 // console.log("I'm not the promise!");
 
 // Challenge 5
-function delay() {}
+function delay() {
+  return new Promise((resolve, reject) => {
+    return resolve();
+  });
+}
 
 // Uncomment the code below to test
 // This code should log "Hello" after 1000ms
@@ -42,8 +51,9 @@ function delay() {}
 // Challenge 6
 //
 // ADD CODE BELOW
-// var secondPromise =
-// var firstPromise =
+var secondPromise = new Promise((resolve, reject) => resolve('second'));
+var firstPromise = new Promise((resolve, reject) => resolve(secondPromise));
+firstPromise.then((data) => console.log(data));
 
 // Challenge 7
 const fakePeople = [
@@ -65,4 +75,9 @@ const fakeAPICall = (i) => {
 
 function getAllData() {
   // CODE GOES HERE
+  Promise.all([fakeAPICall(0), fakeAPICall(1), fakeAPICall(2)]).then((data) =>
+    console.log(data),
+  );
 }
+
+getAllData();
